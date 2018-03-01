@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="main" style="background-color: aqua;width: 100px;height: 100px;position: absolute;left: 50px;top: 50px">
+    <div id="title" style="height: 10px;width:100%;background-color: antiquewhite;position: absolute;left: 0px;top: 0px"></div>
+    <div class="box"></div>
+</div>
+<script>
+
+    var startx;
+    var starty;
+    var startLeft;
+    var startTop;
+    var titleDiv=document.getElementById("title");
+    var mainDiv=document.getElementById("main");
+    var isDown=false;
+//    鼠标按下
+    function movedown(e){
+        e=e?e:window.event;
+        isDown=true;
+        startx=e.clientX;
+        starty=e.clientY;
+        startLeft=parseInt(mainDiv.style.left);
+        startTop=parseInt(mainDiv.style.top);
+    }
+//    鼠标移动
+    function move(e){
+        e=e?e:window.event;
+        if(isDown) {
+            mainDiv.style.left = e.clientX - (startx - startLeft)+"px";
+            mainDiv.style.top = e.clientY - (starty - startTop)+"px";
+        }
+    }
+//    鼠标松开
+    function  moveup(){
+        isDown=false;
+    }
+    titleDiv.onmousedown=movedown;
+    titleDiv.onmousemove=move;
+    titleDiv.onmouseup=moveup;
+</script>
+</body>
+</html>
